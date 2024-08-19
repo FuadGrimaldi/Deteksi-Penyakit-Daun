@@ -6,9 +6,12 @@ Project dibangun menggunakan GUI yaitu pyQt dan menggunakan model CNN untuk klas
 
 - GUI
 
-![Screenshot 2024-07-16 182546](https://github.com/user-attachments/assets/81e7f5ef-12a9-471e-9017-451c000d4bd9)
+![image](https://github.com/user-attachments/assets/779935eb-ba0c-42ca-8cfe-cee02a4fed9b)
 
 - GUI dengan hasil
+
+![image](https://github.com/user-attachments/assets/3864e233-1b7f-4665-af38-b335ba627c76)
+
 
 ## Prasyarat
 
