@@ -20,6 +20,8 @@ from time import ctime  # get time details
 import webbrowser  # open browser
 import threading
 
+from database.disease_data import num_classes, disease_dic
+
 class person:
     name = 'Mr'
 
@@ -157,29 +159,95 @@ class ShowImage(QMainWindow):
         
         elif there_exists(["who are you"], voice_data):
             response = "I am your assistant in the field of plants. I am PlantAI."
-        elif there_exists(["Tell me about tomato blight"], voice_data):
+
+        elif there_exists(["tell me about tomato blight"], voice_data):
             response = "Tomato blight is a serious disease that affects tomato plants. It is caused by a fungus called Phytophthora infestans. This disease can cause the leaves to turn brown and wither, and in severe cases, it can kill the plant."
+        
         elif there_exists(["describe seed plants"], voice_data):
-            response = "a group of plants that have seeds as a means of reproduction. Seeds are the result of fertilization between egg cells and pollen, which function as a means of spreading and maintaining the survival of plant species."
+            response = "Seed plants are a group of plants that reproduce using seeds. These seeds are formed after the fertilization of egg cells by pollen, ensuring the survival and spread of the plant species."
+
+        elif there_exists(["what is powdery mildew"], voice_data):
+            response = "Powdery mildew is a fungal disease that appears as a white or gray powdery substance on the leaves, stems, and flowers of plants. It thrives in warm, dry conditions and can weaken the plant if left untreated."
+
+        elif there_exists(["tell me about rust disease"], voice_data):
+            response = "Rust disease is a fungal infection that causes orange, yellow, or brown pustules on the undersides of leaves. It can lead to leaf drop and reduced plant vigor, especially in crops like wheat, beans, and roses."
+
+        elif there_exists(["what is downy mildew"], voice_data):
+            response = "Downy mildew is a fungal disease that causes yellow or brown spots on the upper surface of leaves, while the undersides develop a fuzzy, grayish growth. It's commonly found in humid, cool environments."
+
+        elif there_exists(["tell me about leaf spot disease"], voice_data):
+            response = "Leaf spot disease is caused by various fungi or bacteria and results in small, dark, circular spots on leaves. Over time, the spots may enlarge and cause the leaves to yellow and fall off."
+
+        elif there_exists(["what is botrytis cinerea"], voice_data):
+            response = "Botrytis cinerea, also known as gray mold, is a fungus that affects many plants, especially in humid conditions. It causes grayish-brown lesions on flowers, fruits, and leaves, leading to rot."
+
+        elif there_exists(["tell me something interesting about plants"], voice_data):
+            response = "Did you know that plants can communicate with each other? Some plants release chemicals to warn neighboring plants of insect attacks, prompting them to produce defensive compounds!"
+
+        elif there_exists(["what is plant respiration"], voice_data):
+            response = "Plant respiration is the process by which plants convert oxygen and glucose into energy, releasing carbon dioxide and water as byproducts. It's the opposite of photosynthesis and occurs all the time."
+
+        elif there_exists(["tell me a plant joke", "tell me something funny about plants"], voice_data):
+            jokes = [
+                "Why do plants hate math? Because it gives them square roots!",
+                "What did the tree say to the wind? Leaf me alone!",
+                "Why don't plants go to school? Because they’re rooted to the spot!"
+            ]
+            response = jokes[random.randint(0, len(jokes) - 1)]
+
         elif there_exists(["thanks", "thank you", "thank u"], voice_data):
             response = "You're welcome! If you need anything else, just let me know."
+        
         elif there_exists(["open webcam"], voice_data):
             self.cap = cv2.VideoCapture(0)
-            self.timer.start(20) 
+            self.timer.start(20)
             response = "Webcam has been opened."
+        
         elif there_exists(["close webcam"], voice_data):
             self.timer.stop()
             if self.cap is not None:
                 self.cap.release()
             self.label.clear()  # Clear the label content
             self.label.setText("Camera Off")  # Set default text
-            response = "Webcam has been closed"
+            response = "Webcam has been closed."
         
+        elif there_exists(["do plants sleep"], voice_data):
+            response = "Yes, plants do have a form of 'sleep'! At night, they undergo a process called nyctinasty, where their leaves close or droop in response to the lack of light."
+
+        elif there_exists(["how do plants drink water"], voice_data):
+            response = "Plants absorb water through their roots via a process called osmosis. The water travels up through the plant's xylem vessels to the leaves and other parts of the plant."
+
+        elif there_exists(["what is chlorophyll"], voice_data):
+            response = "Chlorophyll is the green pigment in plants that allows them to absorb sunlight and convert it into energy through photosynthesis."
+
+        elif there_exists(["what is photosynthesis"], voice_data):
+            response = "Photosynthesis is the process by which plants use sunlight to convert carbon dioxide and water into glucose and oxygen. It's how plants produce the energy they need to grow."
+
+        elif there_exists(["tell me about plant roots"], voice_data):
+            response = "Roots anchor plants to the ground and absorb water and nutrients from the soil. They also store food for the plant and sometimes produce new plants through asexual reproduction."
+
+        elif there_exists(["how do plants grow"], voice_data):
+            response = "Plants grow by using sunlight, water, and nutrients from the soil to produce energy through photosynthesis. This energy is used to build new cells, allowing the plant to grow taller and develop leaves, flowers, and fruits."
+
+        elif there_exists(["what are plant hormones"], voice_data):
+            response = "Plant hormones, also known as phytohormones, are chemicals that regulate various aspects of plant growth and development, such as cell division, flowering, and response to environmental stimuli."
+
+        elif there_exists(["what is plant transpiration"], voice_data):
+            response = "Plant transpiration is the process by which water evaporates from the leaves, stems, and flowers of plants. This helps cool the plant and also creates a negative pressure that pulls water and nutrients up from the roots."
+
+        elif there_exists(["tell me about plant pollination"], voice_data):
+            response = "Pollination is the process by which pollen is transferred from the male part of a flower (the stamen) to the female part (the pistil). This leads to fertilization and the production of seeds."
+
+        elif there_exists(["what are succulents"], voice_data):
+            response = "Succulents are plants that have thick, fleshy leaves or stems adapted to store water. They are often found in arid environments and are popular as low-maintenance houseplants."
+
+        elif there_exists(["how do plants protect themselves"], voice_data):
+            response = "Plants have various defense mechanisms, such as thorns, toxic chemicals, and the ability to close their leaves when touched. Some plants even produce chemicals that attract predators of the insects eating them."
+
         else:
             response = "I'm not sure how to respond to that."
 
         return response
-        
 
     def startCam(self):
         self.cap = cv2.VideoCapture(0)
@@ -280,102 +348,6 @@ transform = transforms.Compose([
     transforms.Resize(size=128),
     transforms.ToTensor()
 ])
-
-num_classes = [
-    'Daun_Apel_Apel_scab', 'Daun_Apel_Busuk_hitam', 'Daun_Apel_Karangan_apel', 'Daun_Apel_sehat', 'Daun_Blueberry_sehat', 
-    'Daun_Ceri_(termasuk_asam)_Jamur_pudarnya', 'Daun_Ceri_(termasuk_asam)_sehat', 
-    'Daun_Jagung_Bercak_daun_Cercospora_Bercak_daun_abu', 'Daun_Jagung_Jamur_umum', 
-    'Daun_Jagung_Bercak_daun_ular', 'Daun_Jagung_sehat', 'Daun_Anggur_Busuk_hitam', 
-    'Daun_Anggur_Esca_(Jamur_Hitam)', 'Daun_Anggur_Bercak_daun_(Isariopsis_Leaf_Spot)', 'Daun_Anggur_sehat', 
-    'Daun_Jeruk_Haunglongbing_(Penyakit_greening_Citrus)', 'Daun_Persik_Bercak_bakteri', 'Daun_Persik_sehat',
-    'Daun_Paprika_bell_Bercak_bakteri', 'Daun_Paprika_bell_sehat', 'Daun_Kentang_Bercak_awal', 
-    'Daun_Kentang_Bercak_akhir', 'Daun_Kentang_sehat', 'Daun_Raspberry_sehat', 'Daun_Kedelai_sehat', 
-    'Daun_Labuh_Jamur_pudarnya', 'Daun_Stroberi_Bercak_daun', 'Daun_Stroberi_sehat', 'Daun_Tomat_Bercak_bakteri', 
-    'Daun_Tomat_Bercak_awal', 'Daun_Tomat_Bercak_akhir', 'Daun_Tomat_Jamur_daun', 'Daun_Tomat_Bercak_Septoria', 
-    'Daun_Tomat_Kutu_spider_Dua_titik', 'Daun_Tomat_Bercak_Target', 
-    'Daun_Tomat_Virus_Kerut_Daun_Kuning_Tomat', 'Daun_Tomat_Virus_mosaik_Tomat', 'Daun_Tomat_sehat'
-]
-
-disease_dic = {
-    'Daun_Apel_Apel_scab': "Jamur *Venturia inaequalis* menyebabkan penyakit apple scab, yang mengakibatkan lesi gelap dan cekung pada daun, buah, dan batang.",
-    
-    'Daun_Apel_Busuk_hitam': "Busuk hitam pada apel disebabkan oleh jamur *Diplodia seriata*, yang menyebabkan lesi gelap dan cekung yang akhirnya menyebabkan pembusukan buah.",
-    
-    'Daun_Apel_Karangan_apel': "Kanker apel disebabkan oleh jamur *Neonectria ditissima*, yang menyebabkan lesi cekung dan kasar pada batang dan cabang.",
-    
-    'Daun_Apel_sehat': "Daun apel yang sehat tidak menunjukkan tanda-tanda penyakit dan bebas dari lesi atau perubahan warna.",
-    
-    'Daun_Blueberry_sehat': "Daun blueberry yang sehat berwarna cerah dan bebas dari gejala penyakit seperti bercak atau perubahan warna.",
-    
-    'Daun_Ceri_(termasuk_asam)_Jamur_pudarnya': "Jamur bubuk pada ceri, disebabkan oleh *Podosphaera clandestina*, menghasilkan pertumbuhan jamur putih seperti bubuk pada daun dan tunas.",
-    
-    'Daun_Ceri_(termasuk_asam)_sehat': "Daun ceri yang sehat bebas dari gejala penyakit dan terlihat hijau dan segar.",
-    
-    'Daun_Jagung_Bercak_daun_Cercospora_Bercak_daun_abu': "Bercak daun abu pada jagung, disebabkan oleh *Cercospora zeae-maydis*, mengakibatkan lesi abu-abu dengan halo kuning pada daun.",
-    
-    'Daun_Jagung_Jamur_umum': "Penyakit jamur umum pada jagung termasuk karat dan jamur, yang menyebabkan berbagai gejala seperti perubahan warna dan deformasi.",
-    
-    'Daun_Jagung_Bercak_daun_ular': "Bercak daun jagung akibat *Helminthosporium turcicum* menghasilkan lesi gelap memanjang pada daun jagung.",
-    
-    'Daun_Jagung_sehat': "Daun jagung yang sehat menunjukkan warna hijau segar dan bebas dari gejala penyakit.",
-    
-    'Daun_Anggur_Busuk_hitam': "Busuk hitam pada anggur disebabkan oleh jamur *Guignardia bidwellii*, yang menyebabkan lesi hitam pada buah dan daun.",
-    
-    'Daun_Anggur_Esca_(Jamur_Hitam)': "Esca pada anggur disebabkan oleh jamur *Phaeomoniella chlamydospora* dan *Phaeoacremonium aleophilum*, yang menyebabkan pembusukan dan kematian jaringan.",
-    
-    'Daun_Anggur_Bercak_daun_(Isariopsis_Leaf_Spot)': "Bercak daun anggur disebabkan oleh jamur *Isariopsis griseola*, menghasilkan bercak coklat pada daun.",
-    
-    'Daun_Anggur_sehat': "Daun anggur yang sehat bebas dari lesi atau gejala penyakit dan terlihat hijau dan segar.",
-    
-    'Daun_Jeruk_Haunglongbing_(Penyakit_greening_Citrus)': "Penyakit greening pada jeruk disebabkan oleh bakteri *Candidatus Liberibacter asiaticus*, menyebabkan daun menguning dan buah kecil dan cacat.",
-    
-    'Daun_Persik_Bercak_bakteri': "Bercak bakteri pada persik disebabkan oleh *Xanthomonas campestris*, yang menyebabkan lesi basah pada daun dan buah.",
-    
-    'Daun_Persik_sehat': "Daun persik yang sehat bebas dari gejala penyakit dan tampak segar dan hijau.",
-    
-    'Daun_Paprika_bell_Bercak_bakteri': "Bercak bakteri pada paprika bell disebabkan oleh *Xanthomonas campestris*, yang menyebabkan bercak basah pada daun.",
-    
-    'Daun_Paprika_bell_sehat': "Daun paprika bell yang sehat bebas dari lesi atau gejala penyakit dan tampak hijau dan segar.",
-    
-    'Daun_Kentang_Bercak_awal': "Bercak awal pada kentang disebabkan oleh jamur *Alternaria solani*, yang menyebabkan bercak gelap dengan tepi kuning pada daun.",
-    
-    'Daun_Kentang_Bercak_akhir': "Bercak akhir pada kentang adalah stadium lanjut dari penyakit yang disebabkan oleh jamur *Alternaria solani*, yang menyebabkan lesi gelap besar pada daun.",
-    
-    'Daun_Kentang_sehat': "Daun kentang yang sehat bebas dari gejala penyakit dan tampak hijau dan segar.",
-    
-    'Daun_Raspberry_sehat': "Daun raspberry yang sehat menunjukkan warna hijau cerah dan bebas dari lesi atau gejala penyakit.",
-    
-    'Daun_Kedelai_sehat': "Daun kedelai yang sehat bebas dari bercak atau gejala penyakit dan terlihat hijau dan segar.",
-    
-    'Daun_Labuh_Jamur_pudarnya': "Jamur pudarnya pada labuh disebabkan oleh *Colletotrichum orbiculare*, yang menyebabkan bercak hitam dan kerusakan pada daun.",
-    
-    'Daun_Stroberi_Bercak_daun': "Bercak daun pada stroberi disebabkan oleh *Mycosphaerella fragariae*, yang menyebabkan bercak coklat dengan tepi kuning pada daun.",
-    
-    'Daun_Stroberi_sehat': "Daun stroberi yang sehat bebas dari gejala penyakit dan tampak hijau dan segar.",
-    
-    'Daun_Tomat_Bercak_bakteri': "Bercak bakteri pada tomat disebabkan oleh *Xanthomonas campestris*, yang menyebabkan bercak kecil dan lesi basah pada daun.",
-    
-    'Daun_Tomat_Bercak_awal': "Bercak awal pada tomat disebabkan oleh *Alternaria solani*, yang menyebabkan bercak gelap dengan tepi kuning pada daun.",
-    
-    'Daun_Tomat_Bercak_akhir': "Bercak akhir pada tomat adalah stadium lanjut dari penyakit yang disebabkan oleh *Alternaria solani*, yang menyebabkan lesi besar pada daun.",
-    
-    'Daun_Tomat_Jamur_daun': "Jamur daun pada tomat disebabkan oleh *Cladosporium fulvum*, yang menyebabkan bercak hitam pada daun.",
-    
-    'Daun_Tomat_Bercak_Septoria': "Bercak Septoria pada tomat disebabkan oleh *Septoria lycopersici*, menghasilkan bercak hitam dengan tepi kuning pada daun.",
-    
-    'Daun_Tomat_Kutu_spider_Dua_titik': "Kutu laba-laba dua titik pada tomat disebabkan oleh *Tetranychus urticae*, menyebabkan noda kuning dan kerusakan daun.",
-    
-    'Daun_Tomat_Bercak_Target': "Bercak target pada tomat disebabkan oleh *Alternaria solani*, yang menyebabkan bercak hitam dengan pola konsentris pada daun.",
-    
-    'Daun_Tomat_Virus_Kerut_Daun_Kuning_Tomat': "Virus kerut daun kuning tomat disebabkan oleh virus *Tomato yellow leaf curl virus* (TYLCV), menyebabkan daun mengerut dan menguning.",
-    
-    'Daun_Tomat_Virus_mosaik_Tomat': "Virus mosaik tomat disebabkan oleh *Tomato mosaic virus* (ToMV), yang menyebabkan pola mosaik dan perubahan warna pada daun.",
-    
-    'Daun_Tomat_sehat': "Daun tomat yang sehat bebas dari gejala penyakit dan tampak hijau dan segar."
-}
-
-
-
 
 model = Plant_Disease_Model()
 model.load_state_dict(torch.load('./Models/plantDisease-resnet34.pth', map_location=torch.device('cpu')))
