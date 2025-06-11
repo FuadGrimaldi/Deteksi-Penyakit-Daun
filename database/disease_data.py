@@ -90,3 +90,47 @@ disease_dic = {
     
     'Daun_Tomat_sehat': "Daun tomat yang sehat bebas dari gejala penyakit dan tampak hijau dan segar."
 }
+
+
+solutions_dict = {
+    'Daun_Apel_Apel_scab': 'Gunakan fungisida berbasis tembaga dan buang daun yang terinfeksi.',
+    'Daun_Apel_Busuk_hitam': 'Pangkas area yang terkena dan gunakan fungisida sistemik.',
+    'Daun_Apel_Karangan_apel': 'Buang buah dan daun yang terinfeksi, semprot dengan fungisida alami.',
+    'Daun_Apel_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Blueberry_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Ceri_(termasuk_asam)_Jamur_pudarnya': 'Gunakan fungisida sulfur, pastikan sirkulasi udara baik.',
+    'Daun_Ceri_(termasuk_asam)_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Jagung_Bercak_daun_Cercospora_Bercak_daun_abu': 'Gunakan fungisida berbahan aktif azoxystrobin.',
+    'Daun_Jagung_Jamur_umum': 'Gunakan fungisida multi-spektrum, rotasi tanaman.',
+    'Daun_Jagung_Bercak_daun_ular': 'Pangkas daun terinfeksi dan semprot fungisida.',
+    'Daun_Jagung_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Anggur_Busuk_hitam': 'Buang bagian yang busuk, semprot fungisida berbasis tembaga.',
+    'Daun_Anggur_Esca_(Jamur_Hitam)': 'Gunakan fungisida khusus Esca, tingkatkan sanitasi.',
+    'Daun_Anggur_Bercak_daun_(Isariopsis_Leaf_Spot)': 'Semprot dengan fungisida propineb, hindari kelembaban berlebih.',
+    'Daun_Anggur_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Jeruk_Haunglongbing_(Penyakit_greening_Citrus)': 'Segera pangkas pohon dan laporkan karena ini penyakit serius.',
+    'Daun_Persik_Bercak_bakteri': 'Gunakan bakterisida, hindari penyebaran kontak langsung.',
+    'Daun_Persik_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Paprika_bell_Bercak_bakteri': 'Gunakan bakterisida berbasis tembaga.',
+    'Daun_Paprika_bell_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Kentang_Bercak_awal': 'Semprot mancozeb, buang daun terinfeksi.',
+    'Daun_Kentang_Bercak_akhir': 'Gunakan fungisida sistemik dan rotasi tanaman.',
+    'Daun_Kentang_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Raspberry_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Kedelai_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Labuh_Jamur_pudarnya': 'Gunakan fungisida berbasis chlorothalonil.',
+    'Daun_Stroberi_Bercak_daun': 'Buang daun terkena, semprot fungisida organik.',
+    'Daun_Stroberi_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.',
+    'Daun_Tomat_Bercak_bakteri': 'Gunakan bakterisida dan bersihkan alat berkebun.',
+    'Daun_Tomat_Bercak_awal': 'Semprot mancozeb atau chlorothalonil.',
+    'Daun_Tomat_Bercak_akhir': 'Gunakan fungisida sistemik dan potong daun bawah.',
+    'Daun_Tomat_Jamur_daun': 'Gunakan fungisida berbasis tembaga.',
+    'Daun_Tomat_Bercak_Septoria': 'Semprot fungisida dan hindari daun basah terlalu lama.',
+    'Daun_Tomat_Kutu_spider_Dua_titik': 'Gunakan insektisida nabati untuk mengusir kutu.',
+    'Daun_Tomat_Bercak_Target': 'Gunakan fungisida berbasis chlorothalonil.',
+    'Daun_Tomat_Virus_Kerut_Daun_Kuning_Tomat': 'Gunakan pestisida virus yang sesuai, kontrol serangga pembawa.',
+    'Daun_Tomat_Virus_mosaik_Tomat': 'Gunakan varietas tahan virus dan kontrol gulma sekitar.',
+    'Daun_Tomat_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.'
+}
+
+

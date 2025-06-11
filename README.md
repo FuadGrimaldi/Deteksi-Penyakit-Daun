@@ -12,7 +12,6 @@ Project dibangun menggunakan GUI yaitu pyQt dan menggunakan model CNN untuk klas
 
 ![image](https://github.com/user-attachments/assets/3864e233-1b7f-4665-af38-b335ba627c76)
 
-
 ## Prasyarat
 
 Sebelum melanjutkan, pastikan Anda telah memenuhi persyaratan berikut pada mesin Anda.

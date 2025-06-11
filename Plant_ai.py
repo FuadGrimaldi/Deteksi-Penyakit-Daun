@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torchvision.models as models
 import torchvision.transforms as transforms
 from PIL import Image
@@ -20,7 +21,7 @@ from time import ctime  # get time details
 import webbrowser  # open browser
 import threading
 
-from database.disease_data import num_classes, disease_dic
+from database.disease_data import num_classes, disease_dic, solutions_dict
 
 class person:
     name = 'Mr'
@@ -154,6 +155,11 @@ class ShowImage(QMainWindow):
             response = f"Okay, I will remember that {person_name}."
             person_obj.setName(person_name)
         
+        elif there_exists(["what is 1 + 1"], voice_data):
+            response = "2 sir"
+        elif there_exists(["what is 10 + 100"], voice_data):
+            response = "110 sir"
+
         elif there_exists(["what is alternaria solani", "alernaria solani"], voice_data):
             response = "Alternaria solani is a fungus that causes early blight in tomatoes and potatoes. It is known for producing dark, concentric lesions on the leaves and stems of these plants."
         
@@ -268,6 +274,10 @@ class ShowImage(QMainWindow):
         self.label_2.setText("No Image")
         self.label_7.clear()
         self.textEdit.clear()
+        self.textEdit_2.clear()
+        self.textEdit_3.clear()
+        self.textEdit_4.clear()
+
     
 
     def update_frame(self): 
@@ -279,13 +289,24 @@ class ShowImage(QMainWindow):
             # Display the frame with the prediction text
             self.displayImage(frame, self.label)
 
-    def predictFromImage(self):
+    def predictFromImage(self, true_label=None):
         if self.image is not None:
-            prediction = predict_image(self.image)
+            prediction, confidence = predict_image(self.image)  # sekarang mengembalikan dua nilai
             description = disease_dic.get(prediction, "Description not available.")
+            solution = solutions_dict.get(prediction, "Solution not available.")
+
             self.label_7.setText(prediction)
             self.textEdit.setText(description)
+            self.textEdit_3.setText(solution)
 
+            # Jika kamu ingin membandingkan hasil prediksi dengan label sebenarnya
+            if true_label is not None:
+                accuracy = 1.0 if prediction == true_label else 0.0
+                self.textEdit_4.setText(
+                    f"Akurasi: {confidence:.2f}%"
+                )
+            else:
+                self.textEdit_4.setText(f"Akurasi: {confidence:.2f}%")
         else:
             self.label_2.setText("No image loaded.")
             self.label_6.clear()
@@ -357,9 +378,21 @@ def predict_image(img):
     img_pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     tensor = transform(img_pil)
     xb = tensor.unsqueeze(0)
-    yb = model(xb)
-    _, preds = torch.max(yb, dim=1)
-    return num_classes[preds[0].item()]
+
+    with torch.no_grad():
+        yb = model(xb)
+
+    # Hitung probabilitas dari output model (logits)
+    probs = F.softmax(yb, dim=1)
+
+    # Ambil nilai confidence tertinggi dan indeks prediksi
+    confidence, pred_idx = torch.max(probs, dim=1)
+
+    # Ambil nama kelas dan akurasi confidence
+    prediction_label = num_classes[pred_idx.item()]
+    accuracy_score = confidence.item() * 100  # dalam persen
+
+    return prediction_label, accuracy_score
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

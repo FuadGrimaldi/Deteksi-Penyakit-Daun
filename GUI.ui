@@ -411,10 +411,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>1260</x>
-      <y>700</y>
-      <width>211</width>
-      <height>81</height>
+      <x>780</x>
+      <y>0</y>
+      <width>221</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -433,6 +433,73 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>PlantAI</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>720</y>
+      <width>511</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_4">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>660</y>
+      <width>511</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>1220</x>
+      <y>620</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>15</pointsize>
+      <weight>7</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 63 15pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>SOLUSI</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
