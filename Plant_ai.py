@@ -109,12 +109,13 @@ class ShowImage(QMainWindow):
         if self.recording:
             self.stopVoiceAi()
         else:
+            speak("Voice AI is now active. You can start speaking.")
             self.startVoiceAi()
 
     def startVoiceAi(self):
         self.recording = True
         self.pushButton_6.setText("Stop Recording")
-        self.voice_thread = threading.Thread(target=self.record_voice)
+        self.voice_thread = threading.Thread(target=self.record_voice)        
         self.voice_thread.start()
 
     def stopVoiceAi(self):
@@ -251,7 +252,7 @@ class ShowImage(QMainWindow):
             response = "Plants have various defense mechanisms, such as thorns, toxic chemicals, and the ability to close their leaves when touched. Some plants even produce chemicals that attract predators of the insects eating them."
 
         else:
-            response = "I'm not sure how to respond to that."
+            response = ""
 
         return response
 
@@ -284,8 +285,9 @@ class ShowImage(QMainWindow):
         ret, frame = self.cap.read()
         if ret:
             prediction = predict_image(frame)
+            label = str(prediction[0])
             # Draw the prediction text on the frame
-            cv2.putText(frame, prediction, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, label, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             # Display the frame with the prediction text
             self.displayImage(frame, self.label)
 
@@ -298,6 +300,7 @@ class ShowImage(QMainWindow):
             self.label_7.setText(prediction)
             self.textEdit.setText(description)
             self.textEdit_3.setText(solution)
+            
 
             # Jika kamu ingin membandingkan hasil prediksi dengan label sebenarnya
             if true_label is not None:
@@ -338,7 +341,6 @@ def record_audio(ask=False):
         try:
             voice_data = r.recognize_google(audio)  # convert audio to text
         except sr.UnknownValueError:  # error: recognizer does not understand
-            speak('I did not get that')
             print("Recognition failed: UnknownValueError")
         except sr.RequestError:
             speak('Sorry, the service is down')  # error: recognizer is not connected

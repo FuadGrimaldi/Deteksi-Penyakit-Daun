@@ -132,5 +132,3 @@ solutions_dict = {
     'Daun_Tomat_Virus_mosaik_Tomat': 'Gunakan varietas tahan virus dan kontrol gulma sekitar.',
     'Daun_Tomat_sehat': 'Tidak perlu tindakan, daun dalam kondisi sehat.'
 }
-
-
